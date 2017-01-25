@@ -1,24 +1,22 @@
 { "messageReport":{
-     "timestamp":"27122016T14:00:00Z",
-     "source":"SATALITE"
-  },
-  "truckReport":{
+    "timestamp":"27122016T14:00:00Z",
+    "source":"SATELLITE",
+    "truckReport":{
       "truckLicenseNumber":"12-33-yy",
       "truckRegistrationCode":"IVECO-1517-NL",
       "truckBrand":"IVECO",
       "truckDriverSSN":""
-  },
-  "journeyReport":{
-    "origin":"Amsterdam",
-    "destination":"Milan",
-    "cargoCode":""
-  },
-  "positionReport":{
-    "longitude":"",
-    "latitude":"",
-    "speed":"",
-    "direction":"",
-    "road":""
-    ""
-  }
+    },
+      "journeyReport":{
+      "origin":"Amsterdam",
+      "destination":"Milan",
+      "cargoCode":""
+    },
+      "positionReport":{
+      "longitude":"51.660770",
+      "latitude":"6.727537",
+      "speed":"",
+      "direction":"",
+      "road":""
+    }
 }
