@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jmeterTestPlan version="1.2" properties="3.1" jmeter="3.1 r1770033">
+  <hashTree>
+    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Truck Position Sampler" enabled="true">
+      <stringProp name="TestPlan.comments"></stringProp>
+      <boolProp name="TestPlan.functional_mode">false</boolProp>
+      <boolProp name="TestPlan.serialize_threadgroups">false</boolProp>
+      <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+        <collectionProp name="Arguments.arguments"/>
+      </elementProp>
+      <stringProp name="TestPlan.user_define_classpath"></stringProp>
+    </TestPlan>
+    <hashTree>
+      <ConstantThroughputTimer guiclass="TestBeanGUI" testclass="ConstantThroughputTimer" testname="Constant Throughput Timer" enabled="true">
+        <intProp name="calcMode">1</intProp>
+        <stringProp name="throughput">${__P(throughput,120000)}</stringProp>
+      </ConstantThroughputTimer>
+      <hashTree/>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="AIS - ThreadGroup" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <intProp name="LoopController.loops">-1</intProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">${__P(threads,100)}</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">1</stringProp>
+        <longProp name="ThreadGroup.start_time">1448286748000</longProp>
+        <longProp name="ThreadGroup.end_time">1448286748000</longProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration"></stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+      </ThreadGroup>
+      <hashTree>
+        <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="JSR223 PreProcessor" enabled="true">
+          <stringProp name="cacheKey">aisSampler</stringProp>
+          <stringProp name="filename"></stringProp>
+          <stringProp name="parameters"></stringProp>
+          <stringProp name="script"></stringProp>
+          <stringProp name="scriptLanguage">groovy</stringProp>
+        </JSR223PreProcessor>
+        <hashTree/>
+        <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="Throughput Controller" enabled="true">
+          <intProp name="ThroughputController.style">1</intProp>
+          <boolProp name="ThroughputController.perThread">false</boolProp>
+          <intProp name="ThroughputController.maxThroughput">1</intProp>
+          <FloatProperty>
+            <name>ThroughputController.percentThroughput</name>
+            <value>20.0</value>
+            <savedValue>0.0</savedValue>
+          </FloatProperty>
+        </ThroughputController>
+        <hashTree>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="TruckPositionMessage" enabled="true">
+            <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+              <collectionProp name="Arguments.arguments">
+                <elementProp name="" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value">{ &quot;messageReport&quot;:{&#xd;
+    &quot;timestamp&quot;:&quot;27122016T14:00:00Z&quot;,&#xd;
+    &quot;source&quot;:&quot;SATELLITE&quot;,&#xd;
+    &quot;truckReport&quot;:{&#xd;
+      &quot;truckLicenseNumber&quot;:&quot;12-33-yy&quot;,&#xd;
+      &quot;truckRegistrationCode&quot;:&quot;IVECO-1517-NL&quot;,&#xd;
+      &quot;truckBrand&quot;:&quot;IVECO&quot;,&#xd;
+      &quot;truckDriverSSN&quot;:&quot;&quot;&#xd;
+    },&#xd;
+      &quot;journeyReport&quot;:{&#xd;
+      &quot;origin&quot;:&quot;Amsterdam&quot;,&#xd;
+      &quot;destination&quot;:&quot;Milan&quot;,&#xd;
+      &quot;cargoCode&quot;:&quot;&quot;&#xd;
+    },&#xd;
+      &quot;positionReport&quot;:{&#xd;
+      &quot;longitude&quot;:&quot;51.660770&quot;,&#xd;
+      &quot;latitude&quot;:&quot;6.727537&quot;,&#xd;
+      &quot;speed&quot;:&quot;&quot;,&#xd;
+      &quot;direction&quot;:&quot;&quot;,&#xd;
+      &quot;road&quot;:&quot;&quot;&#xd;
+    }&#xd;
+}&#xd;
+&quot;aisMessages&quot; : [&#xd;
+{&#xd;
+&quot;reportedVessel&quot; : {&#xd;
+&quot;shipType&quot; : 0,&#xd;
+&quot;length&quot; : 30,&#xd;
+&quot;width&quot; : 8.0,&#xd;
+&quot;draught&quot; : 3.0,&#xd;
+&quot;imo&quot; : 8137213,&#xd;
+&quot;mmsi&quot; : ${mmsid},&#xd;
+&quot;name&quot; : &quot;SENCKENBERG&quot;,&#xd;
+&quot;callsign&quot; : &quot;DDAW&quot;,&#xd;
+&quot;flagRegistryCode&quot; : &quot;DE&quot;&#xd;
+},&#xd;
+&quot;positionReport&quot; : {&#xd;
+&quot;aisMessageType&quot; : &quot;5&quot;,&#xd;
+&quot;version&quot; : 0,&#xd;
+&quot;destination&quot; : &quot;WILHELMSHAVEN&quot;,&#xd;
+&quot;eta&quot; : &quot;2015-01-22 21:00:00&quot;,&#xd;
+&quot;dataTerminalReady&quot; : false,&#xd;
+&quot;dimRefPosition&quot; : {&#xd;
+&quot;toBow&quot; : 18,&#xd;
+&quot;toStern&quot; : 12,&#xd;
+&quot;toStarboard&quot; : 5,&#xd;
+&quot;toPort&quot; : 3&#xd;
+},&#xd;
+&quot;navigationalStatus&quot; : 15,&#xd;
+&quot;epfdType&quot; : 1,&#xd;
+&quot;timeL&quot; : ${timestamp},&#xd;
+&quot;source&quot; : &quot;${source}&quot;&#xd;
+},&#xd;
+&quot;vdmSentence&quot; : &quot;Kamiltubyl&quot;,&#xd;
+&quot;originalNmeas&quot; : [&#xd;
+&quot;itutez&quot;&#xd;
+],&#xd;
+&quot;commentBlock&quot; : {&#xd;
+&quot;originalMessage&quot; : &quot;originalMessage&quot;,&#xd;
+&quot;time&quot; : &quot;1422014500&quot;,&#xd;
+&quot;vdmInfoCb&quot; : {&#xd;
+&quot;type&quot; : &quot;ssn.spm.domain.vdm.commentblock.TCbInfoCb&quot;,&#xd;
+&quot;properties&quot; : {&#xd;
+&quot;dataOriginatorStr&quot; : &quot;${provider}&quot;,&#xd;
+&quot;dataOriginator&quot; : {&#xd;
+&quot;rcc&quot; : &quot;$jmeter&quot;,&#xd;
+&quot;countryCode&quot; : &quot;XDE&quot;&#xd;
+}&#xd;
+}&#xd;
+}&#xd;
+},&#xd;
+&quot;cbRecipients&quot; : [],&#xd;
+&quot;recipients&quot; : [],&#xd;
+&quot;destinations&quot; : [],&#xd;
+&quot;senderProviderAreas&quot; : [],&#xd;
+&quot;persistence&quot; : false,&#xd;
+&quot;voyageCalculation&quot; : false,&#xd;
+&quot;proxied&quot; : false&#xd;
+}&#xd;
+],&#xd;
+&quot;messageId&quot; : &quot;NPRTESTDEAREA2_1:064aedc4-be71-4f4f-ad60-08b65f3aa6e0&quot;,&#xd;
+&quot;proxyName&quot; : &quot;NPRTESTDEAREA2_1&quot;,&#xd;
+&quot;monitoringMessage&quot; : {&#xd;
+&quot;channel&quot; : 1,&#xd;
+&quot;enabled&quot; : false,&#xd;
+&quot;stiresMonitoringMessage&quot; : {&#xd;
+&quot;connected&quot; : true,&#xd;
+&quot;messagesCoreReceived&quot; : 0,&#xd;
+&quot;messagesCoreReceived24h&quot; : 0,&#xd;
+&quot;messagesCoreSent&quot; : 0,&#xd;
+&quot;messagesCoreSent24h&quot; : 0&#xd;
+},&#xd;
+&quot;proxyMonitoringMessage&quot; : {&#xd;
+&quot;active&quot; : false,&#xd;
+&quot;messagesProxySent&quot; : 141,&#xd;
+&quot;messagesProxySent24h&quot; : 1560,&#xd;
+&quot;messagesProxyReceived&quot; : 0,&#xd;
+&quot;messagesProxyReceived24h&quot; : 0,&#xd;
+&quot;providerConnected&quot; : true,&#xd;
+&quot;providerActive&quot; : true,&#xd;
+&quot;storedMessages&quot; : 0,&#xd;
+&quot;version&quot; : &quot;SSN-SI v1.0.2.0&quot;&#xd;
+}&#xd;
+},&#xd;
+&quot;receivedAt&quot; : 0&#xd;
+}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+              </collectionProp>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain">${__P(host,localhost)}</stringProp>
+            <stringProp name="HTTPSampler.port">${__P(port,9002)}</stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+            <stringProp name="HTTPSampler.protocol"></stringProp>
+            <stringProp name="HTTPSampler.contentEncoding">utf-8</stringProp>
+            <stringProp name="HTTPSampler.path">${__P(path,insertAIS)}</stringProp>
+            <stringProp name="HTTPSampler.method">POST</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <stringProp name="HTTPSampler.implementation">HttpClient4</stringProp>
+            <boolProp name="HTTPSampler.monitor">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+              <collectionProp name="HeaderManager.headers">
+                <elementProp name="" elementType="Header">
+                  <stringProp name="Header.name">content-type</stringProp>
+                  <stringProp name="Header.value">application/json</stringProp>
+                </elementProp>
+              </collectionProp>
+            </HeaderManager>
+            <hashTree/>
+          </hashTree>
+        </hashTree>
+      </hashTree>
+    </hashTree>
+  </hashTree>
+</jmeterTestPlan>

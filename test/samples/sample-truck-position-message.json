@@ -1,0 +1,24 @@
+{ "messageReport":{
+     "timestamp":"27122016T14:00:00Z",
+     "source":"SATALITE"
+  },
+  "truckReport":{
+      "truckLicenseNumber":"12-33-yy",
+      "truckRegistrationCode":"IVECO-1517-NL",
+      "truckBrand":"IVECO",
+      "truckDriverSSN":""
+  },
+  "journeyReport":{
+    "origin":"Amsterdam",
+    "destination":"Milan",
+    "cargoCode":""
+  },
+  "positionReport":{
+    "longitude":"",
+    "latitude":"",
+    "speed":"",
+    "direction":"",
+    "road":""
+    ""
+  }
+}
